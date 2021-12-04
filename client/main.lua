@@ -82,10 +82,13 @@ function Process(action, start, tick, finish)
                     Citizen.Wait(1)
                     if tick ~= nil then
                         tick()
-                    end
-		    if Action.canCancel == false then Action.canCancel = true end
-                    if IsControlJustPressed(0, 73) and Action.canCancel then
-                        Cancel()
+                    end		    
+                    if IsControlJustPressed(0, 73) then
+			if Action.canCancel then							
+                           Cancel()
+			else
+			   TriggerEvent("QBCore:Notify", "You cannot cancel")									
+			end								
                     end
 
                     if IsEntityDead(PlayerPedId()) and not Action.useWhileDead then
